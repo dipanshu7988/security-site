@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Tools — SecureSite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{--bg:#f8fafc;--card:#ffffff;--text:#0f172a;--muted:#475569;--accent:#2563eb}
+    .dark{--bg:#0b1220;--card:#071127;--text:#e6eef8;--muted:#9aa9bf;--accent:#3b82f6}
+    html,body{background-color:var(--bg);color:var(--text);}
+    .card{background-color:var(--card);color:var(--text);}
+    a{color:var(--accent);}
+    .muted{color:var(--muted);}
+    .theme-toggle{cursor:pointer;padding:.35rem .65rem;border-radius:.5rem;}
+  </style>
+</head>
+<body>
+  <header class="p-6 card shadow">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">SecureSite</h1>
+      <nav class="flex items-center gap-3">
+        <a href="/">Home</a>
+        <a href="/tools.html">Tools</a>
+        <a href="/contact.html">Contact</a>
+        <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Cybersecurity Tools</h1>
+
+    <!-- Password strength checker -->
+    <section class="mb-6 card p-4 rounded shadow">
+      <h2 class="font-semibold">🔐 Password Strength Checker</h2>
+      <input id="pwd" type="password" placeholder="Type password" class="mt-2 p-2 border w-full rounded"/>
+      <div id="meter" class="mt-2 text-sm muted"></div>
+    </section>
+
+    <!-- Security tip -->
+    <section class="card p-4 rounded shadow">
+      <h2 class="font-semibold mb-2">💡 Security Tip</h2>
+      <p>Use different passwords for each website and enable two-factor authentication.</p>
+    </section>
+
+    <div class="mt-6">
+      <a href="/contact.html" class="text-blue-600">Contact us / Report a bug →</a>
+    </div>
+  </main>
+
+  <footer class="text-sm p-6 text-center card">©️ SecureSite Tools</footer>
+
+  <!-- Password strength script -->
+  <script>
+    const pwd = document.getElementById('pwd');
+    const meter = document.getElementById('meter');
+    if (pwd) {
+      pwd.addEventListener('input', () => {
+        const s = scorePassword(pwd.value);
+        meter.textContent = `Strength: ${s.scoreText} (score ${s.score})`;
+      });
+    }
+    function scorePassword(p) {
+      let score = 0;
+      if (p.length >= 8) score += 1;
+      if (/[A-Z]/.test(p)) score += 1;
+      if (/[0-9]/.test(p)) score += 1;
+      if (/[^A-Za-z0-9]/.test(p)) score += 1;
+      const text = score <= 1 ? 'Very Weak' : score == 2 ? 'Weak' : score == 3 ? 'Good' : 'Strong';
+      return { score, scoreText: text };
+    }
+  </script>
+
+  <!-- Dark mode toggle -->
+  <script>
+  (function () {
+    const key='site-theme', cls='dark', btn=document.getElementById('themeToggle');
+    function set(t){document.documentElement.classList.toggle(cls,t==='dark');btn.textContent=t==='dark'?'☀️':'🌙'}
+    let t=localStorage.getItem(key)|| (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    set(t);
+    btn.addEventListener('click',()=>{t=t==='dark'?'light':'dark';localStorage.setItem(key,t);set(t);});
+  })();
+  </script>
+</body>
+</html>
