@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Site | Cybersecurity Awareness</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="theme-toggle.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --card-bg: #f2f2f2;
+    }
+
+    .dark {
+      --bg-color: #0d1117;
+      --text-color: #e6edf3;
+      --card-bg: #161b22;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text-color);
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--text-color);
+      border-radius: 6px;
+      color: var(--text-color);
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 50px;
+      text-align: center;
+    }
+
+    section {
+      max-width: 800px;
+      margin: auto;
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid #ccc;
+      margin-top: 40px;
+      background-color: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔐 Secure Site</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="tool.html">Security Tools</a>
+      <a href="contact.html">Contact</a>
+      <button class="theme-toggle" id="toggleTheme">🌓</button>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Welcome to Your Cybersecurity Project</h2>
+      <p>
+        This platform helps users learn about online safety and basic cybersecurity practices.
+        Explore tools, learn secure habits, and understand how to protect your digital identity.
+      </p>
+      <p>
+        Use the navigation above to explore the security tools or contact us for queries.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>©️ 2025 Secure Site | Created by Dipanshu</p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleTheme');
+    const className = 'dark';
+    const storageKey = 'theme-preference';
+
+    const applyTheme = (theme) => {
+      document.documentElement.classList.toggle(className, theme === 'dark');
+    };
+
+    const storedTheme = localStorage.getItem(storageKey);
+    if (storedTheme) {
+      applyTheme(storedTheme);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      applyTheme(prefersDark ? 'dark' : 'light');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains(className);
+      const nextTheme = isDark ? 'light' : 'dark';
+      localStorage.setItem(storageKey, nextTheme);
+      applyTheme(nextTheme);
+    });
+  </script>
+</body>
+</html>
