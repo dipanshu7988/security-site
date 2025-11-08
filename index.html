@@ -5,90 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Secure Site | Cybersecurity Awareness</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="theme-toggle.js"></script>
+  <script src="theme-toggle.js" defer></script>
+
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: "Arial", sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       transition: all 0.3s ease;
     }
 
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --card-bg: #f2f2f2;
-    }
-
-    .dark {
-      --bg-color: #0d1117;
-      --text-color: #e6edf3;
-      --card-bg: #161b22;
-    }
-
     header {
-      background-color: var(--card-bg);
-      padding: 15px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ccc;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
+      background-color: #1b1b1b;
+      color: #fff;
+      padding: 15px 0;
+      text-align: center;
     }
 
     nav a {
-      color: var(--text-color);
-      margin: 0 10px;
+      color: #fff;
+      margin: 0 15px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     nav a:hover {
       text-decoration: underline;
     }
 
-    .theme-toggle {
-      background: none;
-      border: 1px solid var(--text-color);
-      border-radius: 6px;
-      color: var(--text-color);
-      padding: 6px 12px;
-      cursor: pointer;
-    }
-
     main {
-      padding: 50px;
       text-align: center;
+      padding: 60px 20px;
     }
 
-    section {
-      max-width: 800px;
-      margin: auto;
-      background: var(--card-bg);
-      padding: 25px;
-      border-radius: 10px;
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 10px auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
     footer {
+      background-color: #1b1b1b;
+      color: #fff;
       text-align: center;
-      padding: 15px;
-      border-top: 1px solid #ccc;
-      margin-top: 40px;
-      background-color: var(--card-bg);
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+      margin-left: 15px;
+      background: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .theme-toggle:hover {
+      opacity: 0.8;
+    }
+
+    /* Light and Dark theme colors */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+    }
+
+    .dark-mode {
+      --bg-color: #121212;
+      --text-color: #ffffff;
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>🔐 Secure Site</h1>
     <nav>
       <a href="index.html">Home</a>
-      <a href="tool.html">Security Tools</a>
+      <a href="tools.html">Security Tools</a>
       <a href="contact.html">Contact</a>
       <button class="theme-toggle" id="toggleTheme">🌓</button>
     </nav>
@@ -101,39 +106,11 @@
         This platform helps users learn about online safety and basic cybersecurity practices.
         Explore tools, learn secure habits, and understand how to protect your digital identity.
       </p>
-      <p>
-        Use the navigation above to explore the security tools or contact us for queries.
-      </p>
     </section>
   </main>
 
   <footer>
-    <p>©️ 2025 Secure Site | Created by Dipanshu</p>
+    <p>© 2025 Secure Site | Created by Dipanshu</p>
   </footer>
-
-  <script>
-    const toggleBtn = document.getElementById('toggleTheme');
-    const className = 'dark';
-    const storageKey = 'theme-preference';
-
-    const applyTheme = (theme) => {
-      document.documentElement.classList.toggle(className, theme === 'dark');
-    };
-
-    const storedTheme = localStorage.getItem(storageKey);
-    if (storedTheme) {
-      applyTheme(storedTheme);
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      applyTheme(prefersDark ? 'dark' : 'light');
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.contains(className);
-      const nextTheme = isDark ? 'light' : 'dark';
-      localStorage.setItem(storageKey, nextTheme);
-      applyTheme(nextTheme);
-    });
-  </script>
 </body>
 </html>
